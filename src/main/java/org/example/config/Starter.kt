@@ -51,8 +51,11 @@ private fun reflect(clazz: Class<*>) {
         for (anno in clazz.declaredAnnotations) {
 //            判断是否声明了创建类的注解
             if (anno is AppComponent) {
-                CONTAINER[s] = clazz.getConstructor().newInstance()
-                break
+                for (co in clazz.declaredConstructors) {
+                    co.isAccessible = true
+                    CONTAINER[s] = co.newInstance()
+                    break
+                }
             }
         }
     }
