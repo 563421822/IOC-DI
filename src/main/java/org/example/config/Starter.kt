@@ -11,7 +11,7 @@ import org.example.annotation.AppComponent
 import org.example.annotation.BeanInject
 
 object Starter {
-    private val CONTAINER: MutableMap<String, Any?> = Hashtable()
+    private val CONTAINER: MutableMap<String, Any> = Hashtable()
     fun run(clazz: Class<AppApplication>, args: Array<String>) {
         val path = Objects.requireNonNull(clazz.getResource("")).path
         val file = File(path)
@@ -56,7 +56,7 @@ object Starter {
 
     private fun operate() {
         for (value in CONTAINER.values) {
-            val clazz: Class<*> = value!!.javaClass
+            val clazz: Class<*> = value.javaClass
             for (f in clazz.declaredFields) {
                 for (anno in f.declaredAnnotations) {
                     //                        声明了自动注入的注解
@@ -74,7 +74,7 @@ object Starter {
         if (type.isInterface) {
             for (value in CONTAINER.values) {
 //                            查找是否已存在符合它的子类
-                if (type.isAssignableFrom(value!!.javaClass)) {
+                if (type.isAssignableFrom(value.javaClass)) {
                     f[o] = value
                     break
                 }
