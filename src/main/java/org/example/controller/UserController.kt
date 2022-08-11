@@ -1,14 +1,15 @@
-package org.example.controller;
+package org.example.controller
 
-import org.example.annotation.AppComponent;
-import org.example.annotation.BeanInject;
-import org.example.service.IAppService;
-import org.example.service.IUserService;
+import org.example.annotation.AppComponent
+import org.example.annotation.BeanInject
+import org.example.service.IAppService
+import org.example.service.IUserService
 
 @AppComponent
-public class UserController {
+class UserController {
     @BeanInject
-    IAppService service;
+    var service: IAppService? = null
+
     @BeanInject
-    IUserService userService;
+    var userService: IUserService? = null
 }

@@ -1,8 +1,7 @@
-package org.example.service.impl;
+package org.example.service.impl
 
-import org.example.annotation.AppComponent;
-import org.example.service.IUserService;
+import org.example.annotation.AppComponent
+import org.example.service.IUserService
 
 @AppComponent
-public class UserServiceImpl implements IUserService {
-}
+class UserServiceImpl : IUserService

@@ -1,4 +1,3 @@
-package org.example.mapper;
+package org.example.mapper
 
-public interface AppMapper {
-}
+interface AppMapper 

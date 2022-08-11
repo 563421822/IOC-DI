@@ -1,4 +1,3 @@
-package org.example.service;
+package org.example.service
 
-public interface IAppService {
-}
+interface IAppService 
