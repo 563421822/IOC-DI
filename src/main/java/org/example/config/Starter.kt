@@ -6,19 +6,21 @@ import java.lang.reflect.Modifier
 import java.util.Hashtable
 import java.util.Locale
 import java.util.Objects
+import java.util.logging.Logger
 import org.example.annotation.AppComponent
 import org.example.annotation.BeanInject
 
 class Starter {
-    private companion object {
+    companion object {
         @JvmStatic
         fun run(clazz: Class<*>, args: Array<String>) {
-            val path = Objects.requireNonNull(clazz.getResource("")).path
-            val file = File(path)
-            val pkg = clazz.getPackage().name + "."
             try {
+                val path = Objects.requireNonNull(clazz.getResource("")).path
+                val file = File(path)
+                val pkg = clazz.getPackage().name + "."
                 init(file, pkg)
                 operate()
+                Logger.getGlobal().info(CONTAINER.toString())
             } catch (e: Exception) {
                 throw RuntimeException(e)
             }
