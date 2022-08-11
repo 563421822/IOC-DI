@@ -4,4 +4,4 @@ import org.example.annotation.AppComponent
 import org.example.service.IUserService
 
 @AppComponent
-class UserServiceImpl : IUserService
+open class UserServiceImpl : IUserService

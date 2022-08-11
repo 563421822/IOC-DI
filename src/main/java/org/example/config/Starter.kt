@@ -1,12 +1,14 @@
 package org.example.config
 
-import org.example.AppApplication
-import org.example.annotation.AppComponent
-import org.example.annotation.BeanInject
 import java.io.File
 import java.lang.reflect.Field
 import java.lang.reflect.Modifier
-import java.util.*
+import java.util.Hashtable
+import java.util.Locale
+import java.util.Objects
+import org.example.AppApplication
+import org.example.annotation.AppComponent
+import org.example.annotation.BeanInject
 
 object Starter {
     private val CONTAINER: MutableMap<String, Any?> = Hashtable()
@@ -23,7 +25,6 @@ object Starter {
         }
     }
 
-    @Throws(Exception::class)
     private fun init(file: File, pkg: String) {
         for (listFile in Objects.requireNonNull(file.listFiles())) {
             if (listFile.isDirectory) {
@@ -36,25 +37,23 @@ object Starter {
         }
     }
 
-    @Throws(Exception::class)
     private fun reflect(clazz: Class<*>) {
         val name = clazz.simpleName
         val s = name[0].toString().lowercase(Locale.getDefault()) + name.substring(1)
         if (CONTAINER[s] != null) return
         //        判断是普通类
-        if (clazz.modifiers == Modifier.PUBLIC) {
+        if (clazz.modifiers == Modifier.PUBLIC || clazz.modifiers == 17) {
 //            遍历类的所有的注解
             for (anno in clazz.declaredAnnotations) {
 //            判断是否声明了创建类的注解
                 if (anno is AppComponent) {
-                    CONTAINER[s] = clazz.newInstance()
+                    CONTAINER[s] = clazz.getConstructor().newInstance()
                     break
                 }
             }
         }
     }
 
-    @Throws(Exception::class)
     private fun operate() {
         for (value in CONTAINER.values) {
             val clazz: Class<*> = value!!.javaClass
@@ -69,7 +68,6 @@ object Starter {
         }
     }
 
-    @Throws(Exception::class)
     private fun inject(o: Any?, f: Field) {
         val type = f.type
         f.isAccessible = true

@@ -6,7 +6,7 @@ import org.example.service.IAppService
 import org.example.service.IUserService
 
 @AppComponent
-class UserController {
+open class UserController {
     @BeanInject
     var service: IAppService? = null
 
