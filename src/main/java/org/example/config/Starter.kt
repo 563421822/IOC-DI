@@ -92,5 +92,5 @@ private fun inject(o: Any, f: Field) {
             f[o] = obj
         }
     }
-    f[o] ?: throw IllegalStateException("inject ${f.name} failed, considering create a bean of $name in the container.")
+    f[o] ?: throw IllegalStateException("inject ${f.name} failed, considering create a bean of $type in the container.")
 }
