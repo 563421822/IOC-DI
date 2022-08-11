@@ -9,5 +9,5 @@ import org.example.service.IUserService
 open class AppServiceImpl : IAppService {
     @BeanInject
     @JvmField
-    var userService: UserServiceImpl? = null
+    var userService: IUserService? = null
 }

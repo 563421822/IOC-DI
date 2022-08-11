@@ -4,6 +4,7 @@ import org.example.annotation.AppComponent
 import org.example.annotation.BeanInject
 import org.example.service.IAppService
 import org.example.service.IUserService
+import org.example.service.impl.UserServiceImpl
 
 @AppComponent
 class AppController {
@@ -12,5 +13,5 @@ class AppController {
 
     @BeanInject
     @JvmField
-    val userService: IUserService? = null
+    val userService: UserServiceImpl? = null
 }
