@@ -8,10 +8,9 @@ import org.example.service.IUserService
 @AppComponent
 class AppController {
     @BeanInject
-    @JvmField
-    var service: IAppService? = null
+    private val service: IAppService? = null
 
     @BeanInject
     @JvmField
-    var userService: IUserService? = null
+    val userService: IUserService? = null
 }

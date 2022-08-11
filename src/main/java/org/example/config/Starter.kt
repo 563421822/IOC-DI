@@ -68,7 +68,7 @@ object Starter {
         }
     }
 
-    private fun inject(o: Any?, f: Field) {
+    private fun inject(o: Any, f: Field) {
         val type = f.type
         f.isAccessible = true
         if (type.isInterface) {
