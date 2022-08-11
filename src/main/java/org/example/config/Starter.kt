@@ -67,9 +67,7 @@ private fun operate() {
         for (f in clazz.declaredFields) {
             for (anno in f.declaredAnnotations) {
                 //                        声明了自动注入的注解
-                if (anno is BeanInject) {
-                    inject(value, f)
-                }
+                if (anno is BeanInject) inject(value, f)
             }
         }
     }
@@ -89,12 +87,6 @@ private fun inject(o: Any, f: Field) {
     } else {
         val name = type.simpleName
         val s = name[0].toString().lowercase(Locale.getDefault()) + name.substring(1)
-        val obj = CONTAINER[s]
-        if (obj != null) {
-            f[o] = obj
-        } else {
-            reflect(type)
-            f[o] = CONTAINER[s]
-        }
+        f[o] = CONTAINER[s]
     }
 }
