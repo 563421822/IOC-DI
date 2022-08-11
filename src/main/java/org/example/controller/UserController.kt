@@ -9,7 +9,7 @@ import org.example.service.IUserService
 open class UserController {
     @BeanInject
     @JvmField
-    var service: IAppService? = null
+    val service: IAppService? = null
 
     @BeanInject
     @JvmField

@@ -1,11 +1,19 @@
 package org.example
 
-import kotlin.jvm.JvmStatic
-import org.example.config.Starter
+import org.example.annotation.AppComponent
+import org.example.annotation.BeanInject
+import org.example.config.Starter.Companion.run
+import org.example.controller.UserController
 
+@AppComponent
 object AppApplication {
+    @BeanInject
+    @JvmField
+    var userController: UserController? = null
+
     @JvmStatic
     fun main(args: Array<String>) {
-        Starter.run(AppApplication::class.java, args)
+        run(AppApplication::class.java, args)
+        println(userController!!.service)
     }
 }
