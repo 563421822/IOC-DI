@@ -22,7 +22,7 @@ class Starter {
                 operate()
                 Logger.getGlobal().info(CONTAINER.toString())
             } catch (e: Exception) {
-                throw RuntimeException(e)
+                throw RuntimeException("nested exception is $e")
             }
         }
     }
@@ -76,6 +76,7 @@ private fun operate() {
 private fun inject(o: Any, f: Field) {
     val type = f.type
     f.isAccessible = true
+    val name = type.simpleName
     if (type.isInterface) {
         for (value in CONTAINER.values) {
 //                            查找是否已存在符合它的子类
@@ -85,8 +86,11 @@ private fun inject(o: Any, f: Field) {
             }
         }
     } else {
-        val name = type.simpleName
         val s = name[0].toString().lowercase(Locale.getDefault()) + name.substring(1)
-        f[o] = CONTAINER[s]
+        val obj = CONTAINER[s]
+        if (obj != null) {
+            f[o] = obj
+        }
     }
+    f[o] ?: throw IllegalStateException("inject ${f.name} failed, considering create a bean of $name in the container.")
 }
